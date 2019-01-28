@@ -1,0 +1,283 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.1
+-- Dumped by pg_dump version 11.1
+
+-- Started on 2019-01-28 17:05:46
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 603 (class 1247 OID 16538)
+-- Name: currency; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.currency AS ENUM (
+    'UAH',
+    'USD',
+    'EUR'
+);
+
+
+ALTER TYPE public.currency OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 200 (class 1259 OID 16570)
+-- Name: ATM_Transactions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ATM_Transactions" (
+    "ID" integer NOT NULL,
+    "BankAccountID" integer NOT NULL,
+    "Sum" money NOT NULL
+);
+
+
+ALTER TABLE public."ATM_Transactions" OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 16527)
+-- Name: Bank_Accounts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Bank_Accounts" (
+    "ID" integer NOT NULL,
+    "UserID" integer NOT NULL,
+    "Currency" public.currency NOT NULL,
+    "AvaliableMoney" double precision NOT NULL
+);
+
+
+ALTER TABLE public."Bank_Accounts" OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 16522)
+-- Name: Current_Rates; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Current_Rates" (
+    "Date" date NOT NULL,
+    "UAHtoUSD" money NOT NULL,
+    "UAHtoEUR" money NOT NULL,
+    "USDtoUAH" money NOT NULL,
+    "EURtoUAH" money NOT NULL,
+    "EURtoUSD" money NOT NULL,
+    "USDtoEUR" money NOT NULL
+);
+
+
+ALTER TABLE public."Current_Rates" OWNER TO postgres;
+
+--
+-- TOC entry 199 (class 1259 OID 16555)
+-- Name: Online_Transactions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Online_Transactions" (
+    "ID" integer NOT NULL,
+    "Currency" public.currency NOT NULL,
+    "FromAccountID" integer NOT NULL,
+    "ToAccountID" integer NOT NULL,
+    "Sum" double precision NOT NULL,
+    "CurrencyRateDay" date NOT NULL
+);
+
+
+ALTER TABLE public."Online_Transactions" OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 16514)
+-- Name: Users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Users" (
+    "ID" integer NOT NULL,
+    "FirstName" text NOT NULL,
+    "LastName" text NOT NULL,
+    "BankUAHAccountID" integer,
+    "BankEURAccountID" integer,
+    "BankUSDAccountID" integer
+);
+
+
+ALTER TABLE public."Users" OWNER TO postgres;
+
+--
+-- TOC entry 2845 (class 0 OID 16570)
+-- Dependencies: 200
+-- Data for Name: ATM_Transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ATM_Transactions" ("ID", "BankAccountID", "Sum") FROM stdin;
+\.
+
+
+--
+-- TOC entry 2843 (class 0 OID 16527)
+-- Dependencies: 198
+-- Data for Name: Bank_Accounts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Bank_Accounts" ("ID", "UserID", "Currency", "AvaliableMoney") FROM stdin;
+\.
+
+
+--
+-- TOC entry 2842 (class 0 OID 16522)
+-- Dependencies: 197
+-- Data for Name: Current_Rates; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Current_Rates" ("Date", "UAHtoUSD", "UAHtoEUR", "USDtoUAH", "EURtoUAH", "EURtoUSD", "USDtoEUR") FROM stdin;
+\.
+
+
+--
+-- TOC entry 2844 (class 0 OID 16555)
+-- Dependencies: 199
+-- Data for Name: Online_Transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Online_Transactions" ("ID", "Currency", "FromAccountID", "ToAccountID", "Sum", "CurrencyRateDay") FROM stdin;
+\.
+
+
+--
+-- TOC entry 2841 (class 0 OID 16514)
+-- Dependencies: 196
+-- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Users" ("ID", "FirstName", "LastName", "BankUAHAccountID", "BankEURAccountID", "BankUSDAccountID") FROM stdin;
+1	Pedro	Pupkin	\N	\N	\N
+\.
+
+
+--
+-- TOC entry 2712 (class 2606 OID 16574)
+-- Name: ATM_Transactions ATM_Transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ATM_Transactions"
+    ADD CONSTRAINT "ATM_Transactions_pkey" PRIMARY KEY ("ID");
+
+
+--
+-- TOC entry 2708 (class 2606 OID 16531)
+-- Name: Bank_Accounts Bank_Accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Bank_Accounts"
+    ADD CONSTRAINT "Bank_Accounts_pkey" PRIMARY KEY ("ID");
+
+
+--
+-- TOC entry 2706 (class 2606 OID 16526)
+-- Name: Current_Rates Current_Rates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Current_Rates"
+    ADD CONSTRAINT "Current_Rates_pkey" PRIMARY KEY ("Date");
+
+
+--
+-- TOC entry 2710 (class 2606 OID 16559)
+-- Name: Online_Transactions Online_Transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Online_Transactions"
+    ADD CONSTRAINT "Online_Transactions_pkey" PRIMARY KEY ("ID");
+
+
+--
+-- TOC entry 2704 (class 2606 OID 16521)
+-- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Users"
+    ADD CONSTRAINT "Users_pkey" PRIMARY KEY ("ID");
+
+
+--
+-- TOC entry 2714 (class 2606 OID 16585)
+-- Name: Users BankAccountEURID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Users"
+    ADD CONSTRAINT "BankAccountEURID" FOREIGN KEY ("BankEURAccountID") REFERENCES public."Bank_Accounts"("ID");
+
+
+--
+-- TOC entry 2719 (class 2606 OID 16575)
+-- Name: ATM_Transactions BankAccountID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ATM_Transactions"
+    ADD CONSTRAINT "BankAccountID" FOREIGN KEY ("BankAccountID") REFERENCES public."Bank_Accounts"("ID");
+
+
+--
+-- TOC entry 2713 (class 2606 OID 16580)
+-- Name: Users BankAccountUAHID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Users"
+    ADD CONSTRAINT "BankAccountUAHID" FOREIGN KEY ("BankUAHAccountID") REFERENCES public."Bank_Accounts"("ID");
+
+
+--
+-- TOC entry 2715 (class 2606 OID 16590)
+-- Name: Users BankAccountUSDID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Users"
+    ADD CONSTRAINT "BankAccountUSDID" FOREIGN KEY ("BankUSDAccountID") REFERENCES public."Bank_Accounts"("ID");
+
+
+--
+-- TOC entry 2717 (class 2606 OID 16560)
+-- Name: Online_Transactions FromAccountID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Online_Transactions"
+    ADD CONSTRAINT "FromAccountID" FOREIGN KEY ("FromAccountID") REFERENCES public."Bank_Accounts"("ID");
+
+
+--
+-- TOC entry 2718 (class 2606 OID 16565)
+-- Name: Online_Transactions ToAccountID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Online_Transactions"
+    ADD CONSTRAINT "ToAccountID" FOREIGN KEY ("ToAccountID") REFERENCES public."Bank_Accounts"("ID");
+
+
+--
+-- TOC entry 2716 (class 2606 OID 16532)
+-- Name: Bank_Accounts UserID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Bank_Accounts"
+    ADD CONSTRAINT "UserID" FOREIGN KEY ("UserID") REFERENCES public."Users"("ID");
+
+
+-- Completed on 2019-01-28 17:05:46
+
+--
+-- PostgreSQL database dump complete
+--
+
