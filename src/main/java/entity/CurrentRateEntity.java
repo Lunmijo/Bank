@@ -1,10 +1,20 @@
-package db_entity.db_objects_impl;
+package entity;
 
-import db_entity.db_objects_i.CurrentRate;
-
-public class CurrentRateImpl implements CurrentRate {
+public class CurrentRateEntity {
     private String date;
     private double UAHtoUSD, UAHtoEUR, USDtoUAH, EURtoUAH, EURtoUSD, USDtoEUR;
+
+    public CurrentRateEntity() { }
+
+    public CurrentRateEntity(String date, double UAHtoUSD, double UAHtoEUR, double USDtoUAH, double EURtoUAH, double EURtoUSD, double USDtoEUR) {
+        this.date = date;
+        this.UAHtoUSD = UAHtoUSD;
+        this.UAHtoEUR = UAHtoEUR;
+        this.USDtoUAH = USDtoUAH;
+        this.EURtoUAH = EURtoUAH;
+        this.EURtoUSD = EURtoUSD;
+        this.USDtoEUR = USDtoEUR;
+    }
 
     public String getDate() {
         return date;

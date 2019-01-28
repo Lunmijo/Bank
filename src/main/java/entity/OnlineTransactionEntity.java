@@ -1,10 +1,20 @@
-package db_entity.db_objects_impl;
+package entity;
 
-import db_entity.db_objects_i.OnlineTransaction;
-
-public class OnlineTransactionImpl implements OnlineTransaction {
+public class OnlineTransactionEntity {
     private int ID, fromAccountID, toAccountID;
-    private String currency;
+    private double sum;
+    private String currency, currencyRateDay;
+
+    public OnlineTransactionEntity() { }
+
+    public OnlineTransactionEntity(int ID, int fromAccountID, int toAccountID, double sum, String currencyRateDay, String currency) {
+        this.ID = ID;
+        this.fromAccountID = fromAccountID;
+        this.toAccountID = toAccountID;
+        this.currency = currency;
+        this.currencyRateDay = currencyRateDay;
+        this.sum = sum;
+    }
 
     public int getID() {
         return ID;
@@ -53,7 +63,4 @@ public class OnlineTransactionImpl implements OnlineTransaction {
     public void setSum(double sum) {
         this.sum = sum;
     }
-
-    String currencyRateDay;
-    double sum;
 }

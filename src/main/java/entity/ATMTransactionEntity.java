@@ -1,10 +1,16 @@
-package db_entity.db_objects_impl;
+package entity;
 
-import db_entity.db_objects_i.ATMTransaction;
-
-public class ATMTransactionImpl implements ATMTransaction {
+public class ATMTransactionEntity {
     private int ID, bankAccountID;
     private double sum;
+
+    public ATMTransactionEntity() { }
+
+    public ATMTransactionEntity(int ID, int bankAccountID, double sum) {
+        this.ID = ID;
+        this.bankAccountID = bankAccountID;
+        this.sum = sum;
+    }
 
     public void setID(int ID) {
         this.ID = ID;

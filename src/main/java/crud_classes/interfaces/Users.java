@@ -1,18 +1,18 @@
 package crud_classes.interfaces;
 
-import db_entity.db_objects_i.User;
+import entity.UserEntity;
 
 import java.util.List;
 
 public interface Users {
-    User findByID(int id);
-    User findByBankAccountID(int id);
+    UserEntity findByID(int id);
+    UserEntity findByBankAccountID(int id);
 
-    void save(User user);
-    void delete(User user);
-    void update(User user);
+    void save(UserEntity user);
+    void delete(UserEntity user);
+    void update(UserEntity user);
 
 
-    List<User> getAllUsersByID(int id);
-    List<User> getAllUsersByLastName(String lastName);
+    List<UserEntity> findAllUsers();
+    List<UserEntity> findAllUsersByLastName(String lastName);
 }

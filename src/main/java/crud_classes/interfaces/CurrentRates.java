@@ -1,9 +1,14 @@
 package crud_classes.interfaces;
 
-import java.util.HashMap;
+import entity.CurrentRateEntity;
+
+import java.util.List;
 
 public interface CurrentRates {
 
-    HashMap<String, Double> findAllbyDate(String date);
+    void saveRate(CurrentRateEntity currentRateEntity);
+    void updateRate(CurrentRateEntity currentRateEntity);
+    void deleteRate(CurrentRateEntity currentRateEntity);
+    List<CurrentRateEntity> findAllByDate(String date);
     //нужно ли переопределять equals() & hashCode() ?
 }

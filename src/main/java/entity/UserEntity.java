@@ -1,10 +1,25 @@
-package db_entity.db_objects_impl;
+package entity;
 
-import db_entity.db_objects_i.User;
-
-public class UserImpl implements User {
+public class UserEntity {
     private int ID, bankUAHAccountID, bankEURAccountID, bankUSDAccountID;
     private String firstName, lastName;
+
+    public UserEntity() { }
+
+    public UserEntity(int ID, String firstName, String lastName) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.firstName = lastName;
+    }
+
+    public UserEntity(int ID, String firstName, String lastName, int bankEURAccountID, int bankUAHAccountID, int bankUSDAccountID) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.firstName = lastName;
+        this.bankEURAccountID = bankEURAccountID;
+        this.bankUAHAccountID = bankUAHAccountID;
+        this.bankUSDAccountID = bankUSDAccountID;
+    }
 
     public void setID(int id) {
         this.ID = id;

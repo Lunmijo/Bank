@@ -1,9 +1,13 @@
 package crud_classes.interfaces;
 
-import db_entity.db_objects_i.ATMTransaction;
+import entity.ATMTransactionEntity;
+
+import java.util.List;
 
 public interface ATMTransactions {
 
-    ATMTransaction findByID(int id);
-    ATMTransaction findByBankAccountID(int id);
+    void save(ATMTransactionEntity atmTransactionEntity);
+    void delete(ATMTransactionEntity atmTransactionEntity);
+    ATMTransactionEntity findByID(int id);
+    List<ATMTransactionEntity> findAllByBankAccountID(int id);
 }
