@@ -1,8 +1,13 @@
-package entity;
+package com.lunmijo.model.entity;
 
 public class CurrentRateEntity {
     private String date;
-    private double UAHtoUSD, UAHtoEUR, USDtoUAH, EURtoUAH, EURtoUSD, USDtoEUR;
+    private double UAHtoUSD;
+    private double UAHtoEUR;
+    private double USDtoUAH;
+    private double EURtoUAH;
+    private double EURtoUSD;
+    private double USDtoEUR;
 
     public CurrentRateEntity() { }
 

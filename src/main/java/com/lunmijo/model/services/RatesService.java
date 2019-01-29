@@ -1,19 +1,24 @@
-package executors;
+package com.lunmijo.model.services;
 
-import entity.CurrentRateEntity;
+import com.lunmijo.model.entity.CurrentRateEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class RatesQueryExecutor {
+public class RatesService {
 
     /**
      * @param statement SQL statement
      * @return ArrayList<CurrentRateEntity>
      */
-    public static ArrayList<CurrentRateEntity> getRatesByQuery(String statement) {
-        ResultSet result = GeneralQueryExecutor.executeQueryWithResult(statement);
+    public static List<CurrentRateEntity> getRatesByQuery(String statement) {
+        ResultSet result = GeneralService.executeQueryWithResult(statement);
+        return RatesService.makeEntityList(result);
+    }
+
+    private static ArrayList<CurrentRateEntity> makeEntityList(ResultSet result) {
         ArrayList<CurrentRateEntity> currentRateEntities = new ArrayList<CurrentRateEntity>();
 
         try {

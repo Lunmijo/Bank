@@ -1,21 +1,21 @@
-package crud_classes.implementations;
+package com.lunmijo.model.repositories;
 
-import entity.BankAccountEntity;
-import executors.BankAccountsQueryExecutor;
-import executors.GeneralQueryExecutor;
+import com.lunmijo.model.entity.BankAccountEntity;
+import com.lunmijo.model.services.BankAccountsService;
+import com.lunmijo.model.services.GeneralService;
 
 import java.util.List;
 
-public class BankAccountsAccess implements crud_classes.interfaces.BankAccounts {
+public class BankAccountsRepository {
 
     public BankAccountEntity findByID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"ID\"=" + id;
-        return BankAccountsQueryExecutor.getBankAccountByQuery(select);
+        return BankAccountsService.getBankAccountByQuery(select);
     }
 
     public BankAccountEntity findByUserID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"UserID\"=" + id;
-        return BankAccountsQueryExecutor.getBankAccountByQuery(select);
+        return BankAccountsService.getBankAccountByQuery(select);
     }
 
     public void save(BankAccountEntity bankAccount) {
@@ -24,22 +24,22 @@ public class BankAccountsAccess implements crud_classes.interfaces.BankAccounts 
                 "\'" + bankAccount.getUserID() + "\'" + ", " +
                 "\'" + bankAccount.getCurrency() + "\'" + ", " +
                 bankAccount.getAvaliableMoney() + ")";
-        GeneralQueryExecutor.executeQueryWithoutResult(insert);
+        GeneralService.executeQueryWithoutResult(insert);
     }
 
     public void update(BankAccountEntity bankAccount) {
         String update = "update \"Bank_Accounts\" set \"AvaliableMoney\"=" + bankAccount.getAvaliableMoney();
-        GeneralQueryExecutor.executeQueryWithoutResult(update);
+        GeneralService.executeQueryWithoutResult(update);
     }
 
     public void delete(BankAccountEntity bankAccount) {
         String delete = "delete from \"Bank_Accounts\" where \"UserID\"= " + (Integer)bankAccount.getUserID();
-        GeneralQueryExecutor.executeQueryWithoutResult(delete);
+        GeneralService.executeQueryWithoutResult(delete);
     }
 
     public List<BankAccountEntity> findAllByUserID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"UserID\"=" + id;
-        return BankAccountsQueryExecutor.getBankAccountsByQuery(select);
+        return BankAccountsService.getBankAccountsByQuery(select);
     }
 
 }

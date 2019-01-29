@@ -1,4 +1,4 @@
-package connection;
+package com.lunmijo.model.connection;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class PostgreSQLConnection {
 
-    static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/Bank";
-    static final String USER = "postgres";
-    static final String PASS = "superdb";
+    private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/Bank";
+    private static final String USER = "postgres";
+    private static final String PASS = "superdb";
 
     private static volatile Connection connection;
 
@@ -35,7 +35,7 @@ public class PostgreSQLConnection {
         if (connection != null) {
             System.out.println("You successfully connected to database now");
         } else {
-            System.out.println("Failed to make connection to database");
+            System.out.println("Failed to make com.lunmijo.model.connection to database");
         }
     }
 
@@ -44,5 +44,10 @@ public class PostgreSQLConnection {
             connect();
         }
         return connection;
+    }
+
+    private static String[] readConnectionInfo() {
+        //TODO: добавить чтение из файла database_access.json
+        return new String[3];
     }
 }

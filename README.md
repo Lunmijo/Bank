@@ -1,7 +1,7 @@
 # Bank
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1da44053cd5242c0a92066d5928b1c28)](https://www.codacy.com/app/Lunmijo/Bank?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Lunmijo/Bank&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.com/Lunmijo/Bank.svg?branch=master)](https://travis-ci.com/Lunmijo/Bank)
 
-Bank Simulator is an Java app made for simulate bank system processes.
+Bank Simulator is an Java com.lunmijo.view.app made for simulate bank system processes.
 
 ## Installation
 

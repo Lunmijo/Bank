@@ -1,36 +1,37 @@
-package executors;
+package com.lunmijo.model.services;
 
-import entity.OnlineTransactionEntity;
+import com.lunmijo.model.entity.OnlineTransactionEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnlineTransactionsExecutor {
+public class OnlineTransactionsService {
 
-    private OnlineTransactionsExecutor() { }
+    private OnlineTransactionsService() { }
 
     /**
      * @param statement SQL statement
      * @return OnlineTransactionEntity
      */
     public static OnlineTransactionEntity getTransactionByQuery(String statement) {
-        ResultSet result = GeneralQueryExecutor.executeQueryWithResult(statement);
-        return getTransactionEntity(result);
+        ResultSet result = GeneralService.executeQueryWithResult(statement);
+        return makeEntity(result);
     }
 
     /**
      * @param statement SQL statement
      * @return List<OnlineTransactionEntity>
      */
-    public static List<OnlineTransactionEntity> getSomeTransactionsByParam(String statement) {
-        ResultSet result = GeneralQueryExecutor.executeQueryWithResult(statement);
+    public static List<OnlineTransactionEntity> getTransactionsList(String statement) {
+        //TODO: с рефлексией и дженериком вынести дублирование кода в отдельный класс и метод
+        ResultSet result = GeneralService.executeQueryWithResult(statement);
         ArrayList<OnlineTransactionEntity> transactionsList = new ArrayList<OnlineTransactionEntity>();
         try {
             while (result.next()) {
 
-                transactionsList.add(getTransactionEntity(result));
+                transactionsList.add(makeEntity(result));
             }
 
             return transactionsList;
@@ -41,7 +42,7 @@ public class OnlineTransactionsExecutor {
         return null;
     }
 
-    private static OnlineTransactionEntity getTransactionEntity(ResultSet result) {
+    private static OnlineTransactionEntity makeEntity(ResultSet result) {
         try {
             int tempID = result.getInt("ID");
             String tempCurrency = result.getString("Currency");
@@ -49,6 +50,7 @@ public class OnlineTransactionsExecutor {
             int tempToAccountID = result.getInt("ToAccountID");
             double tempSum = result.getDouble("Sum");
             String tempCurrencyRateDay = result.getString("CurrencyRateDay");
+
             return new OnlineTransactionEntity(tempID, tempFromAccountID, tempToAccountID, tempSum, tempCurrencyRateDay, tempCurrency);
 
         } catch (SQLException e) {

@@ -1,9 +1,12 @@
-package entity;
+package com.lunmijo.model.entity;
 
 public class OnlineTransactionEntity {
-    private int ID, fromAccountID, toAccountID;
+    private int ID;
+    private int fromAccountID;
+    private int toAccountID;
     private double sum;
-    private String currency, currencyRateDay;
+    private String currency;
+    private String currencyRateDay;
 
     public OnlineTransactionEntity() { }
 

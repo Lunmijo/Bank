@@ -1,8 +1,12 @@
-package entity;
+package com.lunmijo.model.entity;
 
 public class UserEntity {
-    private int ID, bankUAHAccountID, bankEURAccountID, bankUSDAccountID;
-    private String firstName, lastName;
+    private int ID;
+    private int bankUAHAccountID;
+    private int bankEURAccountID;
+    private int bankUSDAccountID;
+    private String firstName;
+    private String lastName;
 
     public UserEntity() { }
 

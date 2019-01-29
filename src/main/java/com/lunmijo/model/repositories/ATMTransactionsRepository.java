@@ -1,25 +1,24 @@
-package crud_classes.implementations;
+package com.lunmijo.model.repositories;
 
-import crud_classes.interfaces.ATMTransactions;
-import entity.ATMTransactionEntity;
-import executors.ATMTransactionsQueryExecutor;
-import executors.GeneralQueryExecutor;
+import com.lunmijo.model.entity.ATMTransactionEntity;
+import com.lunmijo.model.services.ATMTransactionsService;
+import com.lunmijo.model.services.GeneralService;
 
 import java.util.List;
 
-public class ATMTransactionsAccess implements ATMTransactions {
+public class ATMTransactionsRepository {
 
     public void save(ATMTransactionEntity atmTransactionEntity) {
         String insert = "insert into \"Bank_Accounts\"(\"ID\", \"BankAccountID\", \"Sum\") values (" +
                 atmTransactionEntity.getID() + ", " +
                 "\'" + atmTransactionEntity.getBankAccountID() + "\'" + ", " +
                 atmTransactionEntity.getSum() + ")";
-        GeneralQueryExecutor.executeQueryWithoutResult(insert);
+        GeneralService.executeQueryWithoutResult(insert);
     }
 
     public void delete(ATMTransactionEntity atmTransactionEntity) {
         String delete = "delete from \"ATM_Transactions\" where \"ID\"= " + (Integer)atmTransactionEntity.getID();
-        GeneralQueryExecutor.executeQueryWithoutResult(delete);
+        GeneralService.executeQueryWithoutResult(delete);
     }
 
     //Transactions cannot be updated
@@ -30,6 +29,6 @@ public class ATMTransactionsAccess implements ATMTransactions {
 
     public List<ATMTransactionEntity> findAllByBankAccountID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"BankAccountID\"=" + id;
-        return ATMTransactionsQueryExecutor.getTransactionsByQuery(select);
+        return ATMTransactionsService.getTransactionsByQuery(select);
     }
 }

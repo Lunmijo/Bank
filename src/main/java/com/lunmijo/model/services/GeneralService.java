@@ -1,24 +1,24 @@
-package executors;
+package com.lunmijo.model.services;
 
-import connection.PostgreSQLConnection;
+import com.lunmijo.model.connection.PostgreSQLConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class GeneralQueryExecutor {
+public class GeneralService {
 
-    private GeneralQueryExecutor() { }
+    private GeneralService() { }
 
     /**
      * @param query SQL statement
      * @return ResultSet
      */
-    static ResultSet executeQueryWithResult(String query) {
+    public static ResultSet executeQueryWithResult(String query) {
         ResultSet result = null;
 
         try {
-            result = PostgreSQLConnection.getConnection()
-                    .createStatement()
+            result = makeStatement()
                     .executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,13 +32,19 @@ public class GeneralQueryExecutor {
     public static void executeQueryWithoutResult(String query) {
 
         try {
-
-            PostgreSQLConnection.getConnection()
-                    .createStatement()
+            makeStatement()
                     .execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    private static Statement makeStatement() {
+        try {
+            return PostgreSQLConnection.getConnection()
+                    .createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

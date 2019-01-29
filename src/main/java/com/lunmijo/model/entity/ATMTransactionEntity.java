@@ -1,7 +1,8 @@
-package entity;
+package com.lunmijo.model.entity;
 
 public class ATMTransactionEntity {
-    private int ID, bankAccountID;
+    private int ID;
+    private int bankAccountID;
     private double sum;
 
     public ATMTransactionEntity() { }

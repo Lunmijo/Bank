@@ -1,18 +1,27 @@
-package executors;
+package com.lunmijo.model.services;
 
-import entity.ATMTransactionEntity;
+import com.lunmijo.model.entity.ATMTransactionEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ATMTransactionsQueryExecutor {
+public class ATMTransactionsService {
 
-    private ATMTransactionsQueryExecutor() { }
+    private ATMTransactionsService() { }
 
     public static List<ATMTransactionEntity> getTransactionsByQuery(String statement) {
-        ResultSet result = GeneralQueryExecutor.executeQueryWithResult(statement);
+
+        ResultSet result = GeneralService.executeQueryWithResult(statement);
+        return makeListFromDBResult(result);
+    }
+
+    /**
+     * @param result ResultSet - SQL query result
+     * @return ArrayList - transformed into entity resultsResultSet - result from database
+     */
+    private static ArrayList<ATMTransactionEntity> makeListFromDBResult(ResultSet result) {
         ArrayList<ATMTransactionEntity> bankAccountEntities = new ArrayList<ATMTransactionEntity>();
 
         try {
@@ -20,7 +29,6 @@ public class ATMTransactionsQueryExecutor {
                 int tempID = result.getInt("ID");
                 int tempBankAccountID = result.getInt("BankAccountID");
                 double tempSum = result.getDouble("Sum");
-                Double tempAvaliableMoney = result.getDouble("AvaliableMoney");
                 bankAccountEntities.add(new ATMTransactionEntity(tempID, tempBankAccountID, tempSum));
             }
 
@@ -32,3 +40,4 @@ public class ATMTransactionsQueryExecutor {
         return null;
     }
 }
+

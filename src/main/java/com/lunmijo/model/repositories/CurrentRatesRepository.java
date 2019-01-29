@@ -1,13 +1,12 @@
-package crud_classes.implementations;
+package com.lunmijo.model.repositories;
 
-import crud_classes.interfaces.CurrentRates;
-import entity.CurrentRateEntity;
-import executors.RatesQueryExecutor;
-import executors.GeneralQueryExecutor;
+import com.lunmijo.model.entity.CurrentRateEntity;
+import com.lunmijo.model.services.GeneralService;
+import com.lunmijo.model.services.RatesService;
 
 import java.util.List;
 
-public class CurrentRatesAccess implements CurrentRates {
+public class CurrentRatesRepository {
 
     public void saveRate(CurrentRateEntity currentRateEntity) {
         String insert = "insert into \"Current_Rates\"(\"Date\", \"UAHtoUSD\", \"UAHtoEUR\", \"USDtoUAH\", \"EURtoUAH\", \"USDtoEUR\", \"EURtoUSD\"values (" +
@@ -18,7 +17,7 @@ public class CurrentRatesAccess implements CurrentRates {
                 "\'" + currentRateEntity.getEURtoUAH() + "\'" + ", " +
                 "\'" + currentRateEntity.getUSDtoEUR() + "\'" + ", " +
                 currentRateEntity.getEURtoUSD() + ")";
-        GeneralQueryExecutor.executeQueryWithoutResult(insert);
+        GeneralService.executeQueryWithoutResult(insert);
     }
 
     public void updateRate(CurrentRateEntity currentRateEntity) {
@@ -29,16 +28,16 @@ public class CurrentRatesAccess implements CurrentRates {
                 "\"EURtoUAH\"=" + "\'" + currentRateEntity.getEURtoUAH() + "\'" + ", " +
                 "\"USDtoEUR\"=" + "\'" + currentRateEntity.getUSDtoEUR() + "\'" + ", " +
                 "\"EURtoUSD\"=" + "\'" + currentRateEntity.getEURtoUSD() + "\'";
-        GeneralQueryExecutor.executeQueryWithoutResult(update);
+        GeneralService.executeQueryWithoutResult(update);
     }
 
     public void deleteRate(CurrentRateEntity currentRateEntity) {
         String delete = "delete from \"Current_Rates\" where \"Date\"=" + "\'" + currentRateEntity.getDate() + "\'";
-        GeneralQueryExecutor.executeQueryWithoutResult(delete);
+        GeneralService.executeQueryWithoutResult(delete);
     }
 
     public List<CurrentRateEntity> findAllByDate(String date) {
         String select = "select * from \"Current_Rates\"";
-        return RatesQueryExecutor.getRatesByQuery(select);
+        return RatesService.getRatesByQuery(select);
     }
 }

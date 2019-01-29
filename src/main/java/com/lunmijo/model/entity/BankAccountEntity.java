@@ -1,7 +1,8 @@
-package entity;
+package com.lunmijo.model.entity;
 
 public class BankAccountEntity {
-    private int ID, UserID;
+    private int ID;
+    private int UserID;
     private String currency;
     private double avaliableMoney;
 

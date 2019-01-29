@@ -1,4 +1,4 @@
-package main;
+package com.lunmijo.view;
 
 public class Main {
     public static void main(String[] args) {
