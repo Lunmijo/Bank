@@ -4,36 +4,22 @@ import com.lunmijo.model.entity.BankAccountEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class BankAccountsService {
 
     private BankAccountsService() { }
 
     /**
-     * @param query SQL statement
+     * @param statement SQL statement
      * @return BankAccountEntity
      */
-    public static BankAccountEntity getBankAccountByQuery(String query) {
-        ResultSet result = GeneralService.executeQueryWithResult(query);
-        return makeEntity(result);
+    public static BankAccountEntity readBankAccount(String statement) {
+        return GeneralService.readOne(statement, new BankAccountEntity(), new BankAccountsService());
     }
 
-    public static ArrayList<BankAccountEntity> getBankAccountsByQuery(String statement) {
-        ResultSet result = GeneralService.executeQueryWithResult(statement);
-        ArrayList<BankAccountEntity> transactionsList = new ArrayList<BankAccountEntity>();
-        try {
-            while (result.next()) {
-
-                transactionsList.add(makeEntity(result));
-            }
-
-            return transactionsList;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static List<BankAccountEntity> readBankAccounts(String statement) {
+        return GeneralService.readFew(statement, new BankAccountEntity(), new BankAccountsService());
     }
 
     /**

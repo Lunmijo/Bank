@@ -10,12 +10,12 @@ public class BankAccountsRepository {
 
     public BankAccountEntity findByID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"ID\"=" + id;
-        return BankAccountsService.getBankAccountByQuery(select);
+        return BankAccountsService.readBankAccount(select);
     }
 
     public BankAccountEntity findByUserID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"UserID\"=" + id;
-        return BankAccountsService.getBankAccountByQuery(select);
+        return BankAccountsService.readBankAccount(select);
     }
 
     public void save(BankAccountEntity bankAccount) {
@@ -39,7 +39,7 @@ public class BankAccountsRepository {
 
     public List<BankAccountEntity> findAllByUserID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"UserID\"=" + id;
-        return BankAccountsService.getBankAccountsByQuery(select);
+        return BankAccountsService.readBankAccounts(select);
     }
 
 }

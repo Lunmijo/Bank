@@ -16,8 +16,7 @@ public class OnlineTransactionsService {
      * @return OnlineTransactionEntity
      */
     public static OnlineTransactionEntity getTransactionByQuery(String statement) {
-        ResultSet result = GeneralService.executeQueryWithResult(statement);
-        return makeEntity(result);
+        return GeneralService.readOne(statement, new OnlineTransactionEntity(), new OnlineTransactionsService());
     }
 
     /**
@@ -25,21 +24,7 @@ public class OnlineTransactionsService {
      * @return List<OnlineTransactionEntity>
      */
     public static List<OnlineTransactionEntity> getTransactionsList(String statement) {
-        //TODO: с рефлексией и дженериком вынести дублирование кода в отдельный класс и метод
-        ResultSet result = GeneralService.executeQueryWithResult(statement);
-        ArrayList<OnlineTransactionEntity> transactionsList = new ArrayList<OnlineTransactionEntity>();
-        try {
-            while (result.next()) {
-
-                transactionsList.add(makeEntity(result));
-            }
-
-            return transactionsList;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return GeneralService.readFew(statement, new OnlineTransactionEntity(), new OnlineTransactionsService());
     }
 
     private static OnlineTransactionEntity makeEntity(ResultSet result) {

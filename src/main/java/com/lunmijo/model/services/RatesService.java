@@ -14,8 +14,10 @@ public class RatesService {
      * @return ArrayList<CurrentRateEntity>
      */
     public static List<CurrentRateEntity> getRatesByQuery(String statement) {
-        ResultSet result = GeneralService.executeQueryWithResult(statement);
-        return RatesService.makeEntityList(result);
+        return GeneralService.readFew(statement, new CurrentRateEntity(), new RatesService());
+    }
+    public static CurrentRateEntity getRateByQuery(String statement) {
+        return GeneralService.readOne(statement, new CurrentRateEntity(), new RatesService());
     }
 
     private static ArrayList<CurrentRateEntity> makeEntityList(ResultSet result) {

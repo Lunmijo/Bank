@@ -36,7 +36,11 @@ public class CurrentRatesRepository {
         GeneralService.executeQueryWithoutResult(delete);
     }
 
-    public List<CurrentRateEntity> findAllByDate(String date) {
+    public CurrentRateEntity findByDate(String date) {
+        String select = "select * from \"Current_Rates\" where \"Date\"=" + "\'" + date + "\'";
+        return RatesService.getRateByQuery(select);
+    }
+    public List<CurrentRateEntity> findAll() {
         String select = "select * from \"Current_Rates\"";
         return RatesService.getRatesByQuery(select);
     }

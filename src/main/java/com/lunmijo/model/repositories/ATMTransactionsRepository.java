@@ -24,11 +24,12 @@ public class ATMTransactionsRepository {
     //Transactions cannot be updated
 
     public ATMTransactionEntity findByID(int id) {
-        return null;
+        String select = "select * from \"Bank_Accounts\" where \"BankAccountID\"=" + id;
+        return ATMTransactionsService.readTransaction(select);
     }
 
     public List<ATMTransactionEntity> findAllByBankAccountID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"BankAccountID\"=" + id;
-        return ATMTransactionsService.getTransactionsByQuery(select);
+        return ATMTransactionsService.readTransactions(select);
     }
 }
