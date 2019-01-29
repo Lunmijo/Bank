@@ -15,6 +15,12 @@ public class BankAccountEntity {
         this.avaliableMoney = avaliableMoney;
     }
 
+    public BankAccountEntity(int UserID, String currency, double avaliableMoney) {
+        this.UserID = UserID;
+        this.currency = currency;
+        this.avaliableMoney = avaliableMoney;
+    }
+
     public void setID(int ID) {
         this.ID = ID;
     }

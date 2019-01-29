@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CurrentRatesRepository {
 
-    public void saveRate(CurrentRateEntity currentRateEntity) {
+    public static void saveRate(CurrentRateEntity currentRateEntity) {
         String insert = "insert into \"Current_Rates\"(\"Date\", \"UAHtoUSD\", \"UAHtoEUR\", \"USDtoUAH\", \"EURtoUAH\", \"USDtoEUR\", \"EURtoUSD\"values (" +
                 currentRateEntity.getDate() + ", " +
                 "\'" + currentRateEntity.getUAHtoUSD() + "\'" + ", " +
@@ -20,7 +20,7 @@ public class CurrentRatesRepository {
         GeneralService.executeQueryWithoutResult(insert);
     }
 
-    public void updateRate(CurrentRateEntity currentRateEntity) {
+    public static void updateRate(CurrentRateEntity currentRateEntity) {
         String update = "update \"Current_Rates\" set \"UAHtoUSD\"=" + currentRateEntity.getUAHtoUSD() + ", " +
                 "\"UAHtoUSD\"=" + "\'" + currentRateEntity.getUAHtoUSD() + "\'" + ", " +
                 "\"UAHtoEUR\"=" + "\'" + currentRateEntity.getUAHtoEUR() + "\'" + ", " +
@@ -31,16 +31,16 @@ public class CurrentRatesRepository {
         GeneralService.executeQueryWithoutResult(update);
     }
 
-    public void deleteRate(CurrentRateEntity currentRateEntity) {
+    public static void deleteRate(CurrentRateEntity currentRateEntity) {
         String delete = "delete from \"Current_Rates\" where \"Date\"=" + "\'" + currentRateEntity.getDate() + "\'";
         GeneralService.executeQueryWithoutResult(delete);
     }
 
-    public CurrentRateEntity findByDate(String date) {
+    public static CurrentRateEntity findByDate(String date) {
         String select = "select * from \"Current_Rates\" where \"Date\"=" + "\'" + date + "\'";
         return RatesService.getRateByQuery(select);
     }
-    public List<CurrentRateEntity> findAll() {
+    public static List<CurrentRateEntity> findAll() {
         String select = "select * from \"Current_Rates\"";
         return RatesService.getRatesByQuery(select);
     }

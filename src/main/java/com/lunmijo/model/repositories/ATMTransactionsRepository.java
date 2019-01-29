@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ATMTransactionsRepository {
 
-    public void save(ATMTransactionEntity atmTransactionEntity) {
+    public static void save(ATMTransactionEntity atmTransactionEntity) {
         String insert = "insert into \"Bank_Accounts\"(\"ID\", \"BankAccountID\", \"Sum\") values (" +
                 atmTransactionEntity.getID() + ", " +
                 "\'" + atmTransactionEntity.getBankAccountID() + "\'" + ", " +
@@ -16,19 +16,19 @@ public class ATMTransactionsRepository {
         GeneralService.executeQueryWithoutResult(insert);
     }
 
-    public void delete(ATMTransactionEntity atmTransactionEntity) {
+    public static void delete(ATMTransactionEntity atmTransactionEntity) {
         String delete = "delete from \"ATM_Transactions\" where \"ID\"= " + (Integer)atmTransactionEntity.getID();
         GeneralService.executeQueryWithoutResult(delete);
     }
 
     //Transactions cannot be updated
 
-    public ATMTransactionEntity findByID(int id) {
+    public static ATMTransactionEntity findByID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"BankAccountID\"=" + id;
         return ATMTransactionsService.readTransaction(select);
     }
 
-    public List<ATMTransactionEntity> findAllByBankAccountID(int id) {
+    public static List<ATMTransactionEntity> findAllByBankAccountID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"BankAccountID\"=" + id;
         return ATMTransactionsService.readTransactions(select);
     }

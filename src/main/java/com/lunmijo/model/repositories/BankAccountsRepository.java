@@ -8,36 +8,37 @@ import java.util.List;
 
 public class BankAccountsRepository {
 
-    public BankAccountEntity findByID(int id) {
+    public static BankAccountEntity findByID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"ID\"=" + id;
         return BankAccountsService.readBankAccount(select);
     }
 
-    public BankAccountEntity findByUserID(int id) {
+    public static BankAccountEntity findByUserID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"UserID\"=" + id;
         return BankAccountsService.readBankAccount(select);
     }
 
-    public void save(BankAccountEntity bankAccount) {
+    public static void save(BankAccountEntity bankAccount) {
+        int ID = IDGenerator.generateID("BankAccounts");
         String insert = "insert into \"Bank_Accounts\"(\"ID\", \"UserID\", \"Currency\", \"AvaliableMoney\") values (" +
-                bankAccount.getID() + ", " +
+                ID + ", " +
                 "\'" + bankAccount.getUserID() + "\'" + ", " +
                 "\'" + bankAccount.getCurrency() + "\'" + ", " +
                 bankAccount.getAvaliableMoney() + ")";
         GeneralService.executeQueryWithoutResult(insert);
     }
 
-    public void update(BankAccountEntity bankAccount) {
+    public static void update(BankAccountEntity bankAccount) {
         String update = "update \"Bank_Accounts\" set \"AvaliableMoney\"=" + bankAccount.getAvaliableMoney();
         GeneralService.executeQueryWithoutResult(update);
     }
 
-    public void delete(BankAccountEntity bankAccount) {
+    public static void delete(BankAccountEntity bankAccount) {
         String delete = "delete from \"Bank_Accounts\" where \"UserID\"= " + (Integer)bankAccount.getUserID();
         GeneralService.executeQueryWithoutResult(delete);
     }
 
-    public List<BankAccountEntity> findAllByUserID(int id) {
+    public static List<BankAccountEntity> findAllByUserID(int id) {
         String select = "select * from \"Bank_Accounts\" where \"UserID\"=" + id;
         return BankAccountsService.readBankAccounts(select);
     }

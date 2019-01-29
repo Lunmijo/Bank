@@ -16,6 +16,11 @@ public class UserEntity {
         this.firstName = lastName;
     }
 
+    public UserEntity(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.firstName = lastName;
+    }
+
     public UserEntity(int ID, String firstName, String lastName, int bankEURAccountID, int bankUAHAccountID, int bankUSDAccountID) {
         this.ID = ID;
         this.firstName = firstName;
